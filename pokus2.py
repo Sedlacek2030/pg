@@ -12,8 +12,11 @@ def udelej_prumer(seznam):
 # funkce naformatuje retezec, aby vratila text ve formatu:
 # "Jmeno: Jan, Prijmeni: Novak, Vek: 20, Prumerna znamka: 2.5"
 def naformatuj_text(slovnik):
-    jmeno = slovník["Jmeno"]
-    return f"Jmeno:{jmeno}"
+    jmeno = slovnik["jmeno"]
+    prijmeni = slovnik["prijmeni"]
+    vek = slovnik["vek"]
+    prumer = slovnik["prumer"]
+    return f"Jmeno:{jmeno}, Příjmení:{prijmeni}, Věk: {vek}, Průměr:{prumer}"
 
 
 if __name__ == "__main__":
