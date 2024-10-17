@@ -1,10 +1,10 @@
 print("Hello world!")
 
-def sudy_nebol_lichy(number):
+def sudy_nebo_lichy(number):
     if number % 2 == 0:
         print("Number is even")
     else:
         print("Number is odd")
 
-sudy_nebol_lichy(1000000)
+sudy_nebo_lichy(1000000)
 sudy_nebo_lichy(5)
