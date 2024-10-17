@@ -6,4 +6,5 @@ def sudy_nebol_lichy(number):
     else:
         print("Number is odd")
 
-sudy_nebol_lichy()
+sudy_nebol_lichy(1000000)
+sudy_nebo_lichy(5)
