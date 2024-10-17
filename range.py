@@ -27,8 +27,16 @@ def while_enumerate(iterable3, start=0):
     return result3
 
 def my_zip(*iterables):
+    results = []
+    lenght = len(iterables[0])
+    for i in range(0,lenght):
+        subresult=[]
+        for j in range(0,len(iterables)):
+            subresult.append(iterables[j][i])
+        results.append(tuple(subresult))
+        print (i, iterables[1][i])
 
-    return [(1,4,7),(2,5,8,),(3,6,9)]
+    return results
 
 
 if __name__=="__main__":
