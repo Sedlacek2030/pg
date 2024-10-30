@@ -8,9 +8,80 @@ def je_tah_mozny(figurka, cilova_pozice, obsazene_pozice):
     
     :return: True, pokud je tah možný, jinak False.
     """
-    # Implementace pravidel pohybu pro různé figury zde.
-    return False
+    typ = figurka["typ"]
+    pozice = figurka["pozice"]
+    
+    #Ověření existence cílové pozice
+    if not (1 <= cilova_pozice[0]<=8 and 1<=cilova_pozice[1]<=8):
+       return False
+    
+    #Ověření volnosti pozice
+    if cilova_pozice in obsazene_pozice:
+        return False
 
+    #Pohyb jednotlivých figur
+    if typ == "pěšec":
+        return tah_pesec(pozice, cilova_pozice, obsazene_pozice)
+    elif typ == "jezdec":
+        return tah_jezdec(pozice, cilova_pozice,)
+    elif typ == "věž":
+        return tah_vez(pozice, cilova_pozice, obsazene_pozice)
+    elif typ == "střelec":
+        return tah_strelec(pozice, cilova_pozice, obsazene_pozice)
+    elif typ == "dáma":
+        return tah_dama(pozice, cilova_pozice, obsazene_pozice)
+    elif typ == "král":
+        return tah_kral(pozice, cilova_pozice,)
+    else:
+        return False
+    
+    #Funkce tahu figur
+def tah_pesec(pozice, cilova_pozice, obsazene_pozice):
+    smer = 1 #Směr pohybu pěšce
+    if pozice[1] == cilova_pozice[1]: #Stejný sloupec
+        if cilova_pozice[0] == pozice[0]+smer and cilova_pozice not in obsazene_pozice:
+            return True
+        elif pozice[0] == 2 and cilova_pozice[0] == pozice[0]+2*smer and (pozice[1]) not in obsazene_pozice and cilova_pozice not in obsazene_pozice:
+            return True
+    return False
+    
+def tah_jezdec(pozice, cilova_pozice):
+    radkovy_posun = abs(pozice[0] - cilova_pozice[0])
+    sloupcovy_posun = abs(pozice[1] - cilova_pozice[1])
+    return (radkovy_posun, sloupcovy_posun) in [(2,1), (1,2)]
+    
+def tah_vez(pozice, cilova_pozice, obsazene_pozice):
+    if pozice[0] == cilova_pozice[0] or pozice[1] == cilova_pozice[1]:
+        return cesta_volna(pozice, cilova_pozice, obsazene_pozice)
+    return False
+    
+def tah_strelec(pozice, cilova_pozice, obsazene_pozice):
+    radkovy_posun = abs(pozice[0] - cilova_pozice[0])
+    sloupcovy_posun = abs(pozice[1] - cilova_pozice[1])
+    if radkovy_posun == sloupcovy_posun:
+        return cesta_volna(pozice, cilova_pozice, obsazene_pozice)
+    return False
+    
+def tah_dama(pozice, cilova_pozice, obsazene_pozice):
+    if tah_vez(pozice, cilova_pozice, obsazene_pozice) or tah_strelec(pozice, cilova_pozice, obsazene_pozice):
+        return True
+    return False    
+    
+def tah_kral(pozice, cilova_pozice):
+        radkovy_posun = abs(pozice[0] - cilova_pozice[0])
+        sloupcovy_posun = abs(pozice[1] - cilova_pozice[1])
+        return max(radkovy_posun, sloupcovy_posun) == 1    
+    
+def cesta_volna(pozice, cilova_pozice, obsazena_pozice):
+    radkovy_smer = (cilova_pozice[0]-pozice[0])// max(1, abs(cilova_pozice[0] - pozice[0]))
+    sloupcovy_smer = (cilova_pozice[1] - pozice[1]) // max(1, abs(cilova_pozice[1] - pozice[1]))
+    radek, sloupec = pozice[0] + radkovy_smer, pozice[1] + sloupcovy_smer
+    while (radek, sloupec) != cilova_pozice:
+        if (radek, sloupec) in obsazene_pozice:
+            return False
+        radek += radkovy_smer
+        sloupec += sloupcovy_smer
+    return True    
 
 if __name__ == "__main__":
     pesec = {"typ": "pěšec", "pozice": (2, 2)}
@@ -33,3 +104,7 @@ if __name__ == "__main__":
     print(je_tah_mozny(dama, (8, 1), obsazene_pozice))  # False, dámě v cestě stojí jiná figura
     print(je_tah_mozny(dama, (1, 3), obsazene_pozice))  # False, dámě v cestě stojí jiná figura
     print(je_tah_mozny(dama, (3, 8), obsazene_pozice))  # True
+
+
+    
+    #Assited by ChatGPT
