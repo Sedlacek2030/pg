@@ -90,3 +90,5 @@ if __name__ == '__main__':
         print("Nebyl zadát název souboru.")
     except Exception as e:
         print(f"Došlo k neočekávané chybě: {e}")
+
+#Assitance provided via ChatGPT
