@@ -21,6 +21,7 @@ def download_json_and_parse_brands(prefix):
 
     return brands
 if __name__ == "__main__":
-    with open("data.json", "r") as fp:
-        content = fp.read()
-        print(content)
+    prefix = input("Zadej prefix:")
+    brands = download_json_and_parse_brands(prefix)
+    for brand in i brands:
+        print(brand)
