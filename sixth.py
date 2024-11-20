@@ -1,5 +1,7 @@
+
 import sys
 import requests
+from bs4 import BeautifulSoup
 
 
 def download_url_and_get_all_hrefs(url):
@@ -10,6 +12,13 @@ def download_url_and_get_all_hrefs(url):
     <a href="url">odkaz</a> a z nich nactete url, ktere vratite jako seznam pomoci return
     """
     hrefs = []
+    response = requests.get(url)
+    if response.status_code == 200:
+        soup = BeautifulSoup(response.content, 'html.parser')
+        for a_tag in soup.find_all("a", href = True):
+            hrefs.append(a_tag["href"])
+        else:
+            print(f"Chyba: Stavový kód {response.status_code}")
 
     return hrefs
 
@@ -17,7 +26,10 @@ def download_url_and_get_all_hrefs(url):
 if __name__ == "__main__":
     try:
         url = sys.argv[1]
-        download_url_and_get_all_hrefs(url)
+        linx = download_url_and_get_all_hrefs(url)
+        print("Nalezené odkazy:")
+        for link in linx:
+            print(link)
     # osetrete potencialni chyby pomoci vetve except
     except Exception as e:
         print(f"Program skoncil chybou: {e}")
