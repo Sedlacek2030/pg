@@ -1,0 +1,17 @@
+návod pro úkol
+
+def convert_number(value):
+    # Check if the input is a valid binary number
+    if all(digit in '01' for digit in value):
+        # It's binary, convert to decimal
+        decimal_value = int(value, 2)
+        return f"Binary {value} to Decimal: {decimal_value}"
+    else:
+        try:
+            # Try to treat it as a decimal number
+            decimal_value = int(value)
+            # Convert decimal to binary
+            binary_value = bin(decimal_value)[2:]  # bin() adds '0b' prefix, remove it
+            return f"Decimal {decimal_value} to Binary: {binary_value}"
+        except ValueError:
+            return "Invalid input. Please enter a valid binary or decimal number."
