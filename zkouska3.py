@@ -10,7 +10,7 @@ class Shape():
     def area(self):
         return 0.0
 
-class Rectangle(Shape):
+class Rectangle(Shape):     #Hlavní třída Shape, Rectangle podtřídou Shape a dědí vlastnosti (ITC area)
     def __init__(self, width, height):
         self.width = width
         self.height = height
