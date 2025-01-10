@@ -1,32 +1,36 @@
+# Příklad 3: Základy OOP (dědičnost, abstrakce, zapouzdření)
+# Zadání:
+# Vytvořte dvě podtřídy třídy `Shape`: `Rectangle` a `Circle`.
+# - `Rectangle` má atributy `width` a `height` a implementuje metodu `area`.
+# - `Circle` má atribut `radius` a implementuje metodu `area`.
 
-class Osoba:
-    def __init__(self, jmeno, věk) -> None:
-        self.jmeno = jmeno
-        self.věk = věk
 
-    def __str__(self) -> str:
-        return f"Osoba(jmeno={self.jmeno}, věk={self.vek})"
+class Shape():
 
-class Student(Osoba):
-    def __init__(self, jmeno, věk, ročník) -> None:
-        super().__init__(jmeno, věk)
-        self.ročník = ročník
+    def area(self):
+        return 0.0
 
-    def __str__(self) -> str:
-        return f"Student {self.jmeno} studuje {self.ročník}. ročník"
+class Rectangle(Shape):
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
 
-class Učitel(Osoba):
-    def __init__(self, jmeno, věk, obor) -> None:
-        super().__init__(jmeno, věk)
-        self.obor = obor
+    def area(self):
+        return self.width * self.height
 
-    def __str__(self) -> str:
-        return f"Učitel {self.jmeno} učí obor {self.obor}"
-if __name__ == "__main__":
-    student1 = Student("Adam", 20, 2)
-    student2 = Student("Eva", 19, 1)
-    učitel = Učitel("Tomáš", 40, "IT")
+class Circle(Shape):
+    def __init__(self, radius):
+        self.radius = radius
 
-    print(student1)
-    print(student2)
-    print(učitel)
+    def area(self):
+        return 3.14159 * (self.radius ** 2) #import math pro math.pi(hodnotu pí)
+
+from unittest.mock import patch, MagicMock, mock_open
+
+# Pytest testy pro Příklad 3
+def test_shapes():
+    rect = Rectangle(4, 5)
+    assert rect.area() == 20
+
+    circle = Circle(3)
+    assert round(circle.area(), 1) == 28.3
